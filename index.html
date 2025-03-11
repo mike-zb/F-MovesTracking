@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubik Cube Control</title>
+</head>
+
+<body>
+
+<div class="wrapper">
+  <h2>F moves tracking</h2>
+  <p> Press the button to visualize what happens to DFL corner and its Swap Pair (SP) upon each movement. </p>
+  <p> White corner represents DFL edge, purple represents the SP. </br> No purple corner means CP solved. </p>
+
+  <div class="container">
+    <div class="layout">
+
+      <div class="dummyDiv" style="width: 50px;"></div>
+
+      <div class="main-section">
+        <div class="umoves">
+          <button id="Up">&nbspU'</button>
+          <button id="U">&nbspU&nbsp</button>
+        </div>
+        <div class="stateImg">
+          <img id="cubeImage" src="./img/0o0.png" alt="State" state="0o0">
+        </div>
+        <div class="fmoves">
+          <button id="Fp">&nbspF'</button>
+          <button id="F">&nbspF&nbsp</button>
+        </div>
+      </div>
+
+      <div class="side-space" style="width: 50px; display: flex; align-items: flex-start;">
+        <div class="rmoves" style="align-items: flex-start; margin-left: 0;">
+          <button id="R">&nbspR&nbsp</button>
+          <button id="Rp">&nbspR'</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="keybinds-section mt-4" style="text-align: center;">
+    <h4>Keybinds</h4>
+    <div class="keybinds-columns d-flex flex-column align-items-center">
+      <div class="d-flex mb-2 justify-content-center align-items-center">
+        <div class="d-flex align-items-center justify-content-center me-4">
+          <span class="badge bg-secondary key-icon">A</span>
+          <span class="key-label">R&nbsp</span>
+        </div>
+        <div class="d-flex align-items-center justify-content-center me-4">
+          <span class="badge bg-secondary key-icon">F</span>
+          <span class="key-label">U'</span>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <span class="badge bg-secondary key-icon">G</span>
+          <span class="key-label">F'</span>
+        </div>
+      </div>
+      <div class="d-flex mb-2 justify-content-center align-items-center">
+        <div class="d-flex align-items-center justify-content-center me-4">
+          <span class="badge bg-secondary key-icon">Z</span>
+          <span class="key-label">R'</span>
+        </div>
+        <div class="d-flex align-items-center justify-content-center me-4">
+          <span class="badge bg-secondary key-icon">V</span>
+          <span class="key-label">U&nbsp</span>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <span class="badge bg-secondary key-icon">B</span>
+          <span class="key-label">F&nbsp</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resources-section">
+    <h4 class="resources-title">Resources</h4>
+    <p class="resources-text">CEOR bible: <a href="https://docs.google.com/spreadsheets/d/1F0zPKlARw3GUTODys_wrtfP7cqgzS7Kse_Cwv67XBQA" target="_blank">Advanced CEOR sheet</a></p>
+    <p class="resources-text">Mapped states: <a href="https://docs.google.com/spreadsheets/d/1lOpN-W6Zg6SXFr-mkOq0ZqsCMalrZ8Iz9sevCuLim7w/edit?usp=sharing" target="_blank">Full F moves Mapped</a></p>
+    <p class="resources-text">Tracking F moves (text): <a href="https://docs.google.com/document/d/1nEpD-wwb9AmcdcHKwpYroQiYHmfklfvndWt5yIbEpkQ" target="_blank">F moves tracking</a></p>
+    <p class="resources-text">For cube images: <a href="https://visualcube.roudai.net/" target="_blank">Visual cube editor </a></p>
+    <br/>
+    <p class="resources-text">Created by <strong>Mike</strong> (2023BELT03)</p>
+  </div>
+
+</div>
+
+<style>
+  body {
+    background-color: #2c2f33;
+    color: #f0f0f0; 
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .wrapper {
+    padding: 20px;
+    background-color: #23272a;  
+    border: 2px solid #444;    
+    border-radius: 10px;
+    margin: 20px auto;
+    text-align: center;
+    width: 560px;
+  }
+
+  .wrapper h2 {
+    margin-bottom: 20px;
+  }
+    
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .layout {
+    display: flex;
+    align-items: center;
+  }
+
+  .main-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .umoves, .fmoves {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    gap: 5px;
+  }
+
+  .stateImg {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+  }
+
+  .rmoves {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 5px;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  button {
+    outline: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid #23272a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    font-family: monospace;
+    font-size: 14px;
+  }
+
+  #U, #Up { background-color: #f1c40f; }
+  #R, #Rp { background-color: #e74c3c; }
+  #F, #Fp { background-color: #3498db; }
+    
+  button:active { border-color: #fff }
+  .key-action { border-color: #fff }
+  
+  .keybinds-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .keybinds-columns {
+    margin-top: 20px;
+    font-family: 'Inconsolata', monospace;
+  }
+
+  .key-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    font-family: 'Inconsolata', monospace;
+    border: 1px solid #333;
+    box-shadow: 0 2px 0 #666;
+    background-color: #e0e0e0;
+    margin-right: 10px;
+    padding: 2px;
+  }
+
+  .resources-section {
+    padding: 5px;
+    text-align: center;
+    margin-top: 15px;
+    border-top: 1px solid #ccc;
+  }
+
+  .resources-title {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  .resources-text {
+    margin: 2px 0;
+    font-size: 14px;
+  }
+
+  .resources-section a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .resources-section a:hover {
+    color: #2980b9;
+  }
+
+</style>
+
+<script defer>
+
+  const movesMap = {
+    "0o0": {"Rp":"0o0", "Up": "0o0", "Fp": "5o3", "F": "1o3", "U": "0o0", "R": "0o0"}, 
+    "0oF": {"Rp":"0oR", "Up": "0oR", "Fp": "5o4", "F": "1o5", "U": "0oL", "R": "0oD"}, 
+    "0oL": {"Rp":"0oL", "Up": "0oF", "Fp": "5o6", "F": "1o0", "U": "0oB", "R": "0oL"}, 
+    "0oB": {"Rp":"0oD", "Up": "0oL", "Fp": "5o1", "F": "1o4", "U": "0oR", "R": "0oR"}, 
+    "0oR": {"Rp":"0oB", "Up": "0oB", "Fp": "5o2", "F": "1o6", "U": "0oF", "R": "0oF"}, 
+    "0oD": {"Rp":"0oF", "Up": "0oD", "Fp": "5o0", "F": "1o2", "U": "0oD", "R": "0oB"}, 
+    "1o0": {"Rp":"1o0", "Up": "4o0", "Fp": "0oL", "F": "4o5", "U": "2o0", "R": "1o0"}, 
+    "1o2": {"Rp":"1o2", "Up": "4o1", "Fp": "0oD", "F": "4o1", "U": "2o3", "R": "1o2"}, 
+    "1o3": {"Rp":"1o4", "Up": "4o2", "Fp": "0o0", "F": "4o3", "U": "2o4", "R": "1o6"}, 
+    "1o4": {"Rp":"1o5", "Up": "4o3", "Fp": "0oB", "F": "4o6", "U": "2o1", "R": "1o3"}, 
+    "1o5": {"Rp":"1o6", "Up": "4o5", "Fp": "0oF", "F": "4o2", "U": "2o5", "R": "1o4"}, 
+    "1o6": {"Rp":"1o3", "Up": "4o6", "Fp": "0oR", "F": "4o0", "U": "2o6", "R": "1o5"}, 
+    "2o0": {"Rp":"2o0", "Up": "1o0", "Fp": "2o4", "F": "2o6", "U": "3o0", "R": "2o0"}, 
+    "2o1": {"Rp":"2o1", "Up": "1o4", "Fp": "2o1", "F": "2o1", "U": "3o2", "R": "2o1"}, 
+    "2o3": {"Rp":"2o4", "Up": "1o2", "Fp": "2o3", "F": "2o3", "U": "3o4", "R": "2o6"}, 
+    "2o4": {"Rp":"2o5", "Up": "1o3", "Fp": "2o5", "F": "2o0", "U": "3o1", "R": "2o3"}, 
+    "2o5": {"Rp":"2o6", "Up": "1o5", "Fp": "2o6", "F": "2o4", "U": "3o5", "R": "2o4"}, 
+    "2o6": {"Rp":"2o3", "Up": "1o6", "Fp": "2o0", "F": "2o5", "U": "3o6", "R": "2o5"}, 
+    "3o0": {"Rp":"4o0", "Up": "2o0", "Fp": "3o0", "F": "3o0", "U": "4o0", "R": "6o0"}, 
+    "3o1": {"Rp":"4o1", "Up": "2o4", "Fp": "3o5", "F": "3o6", "U": "4o2", "R": "6o1"}, 
+    "3o2": {"Rp":"4o2", "Up": "2o1", "Fp": "3o6", "F": "3o5", "U": "4o3", "R": "6o2"}, 
+    "3o4": {"Rp":"4o5", "Up": "2o3", "Fp": "3o4", "F": "3o4", "U": "4o1", "R": "6o3"}, 
+    "3o5": {"Rp":"3o5", "Up": "2o5", "Fp": "3o2", "F": "3o1", "U": "4o5", "R": "6o4"}, 
+    "3o6": {"Rp":"4o3", "Up": "2o6", "Fp": "3o1", "F": "3o2", "U": "4o6", "R": "6o5"}, 
+    "4o0": {"Rp":"5o0", "Up": "3o0", "Fp": "1o6", "F": "5o2", "U": "1o0", "R": "3o0"}, 
+    "4o1": {"Rp":"5o1", "Up": "3o4", "Fp": "1o2", "F": "5o0", "U": "1o2", "R": "3o1"}, 
+    "4o2": {"Rp":"5o2", "Up": "3o1", "Fp": "1o5", "F": "5o4", "U": "1o3", "R": "3o2"}, 
+    "4o3": {"Rp":"5o4", "Up": "3o2", "Fp": "1o3", "F": "5o3", "U": "1o4", "R": "3o6"}, 
+    "4o5": {"Rp":"4o5", "Up": "3o5", "Fp": "1o0", "F": "5o6", "U": "1o5", "R": "3o4"}, 
+    "4o6": {"Rp":"5o3", "Up": "3o6", "Fp": "1o4", "F": "5o1", "U": "1o6", "R": "3o5"}, 
+    "5o0": {"Rp":"6o0", "Up": "5o0", "Fp": "4o1", "F": "0oD", "U": "5o0", "R": "4o0"}, 
+    "5o1": {"Rp":"6o1", "Up": "5o4", "Fp": "4o6", "F": "0oB", "U": "5o2", "R": "4o1"}, 
+    "5o2": {"Rp":"6o2", "Up": "5o1", "Fp": "4o0", "F": "0oR", "U": "5o3", "R": "4o2"}, 
+    "5o3": {"Rp":"6o4", "Up": "5o2", "Fp": "4o3", "F": "0o0", "U": "5o4", "R": "4o6"}, 
+    "5o4": {"Rp":"6o5", "Up": "5o3", "Fp": "4o2", "F": "0oF", "U": "5o1", "R": "4o3"}, 
+    "5o6": {"Rp":"6o3", "Up": "5o6", "Fp": "4o5", "F": "0oL", "U": "5o6", "R": "4o5"}, 
+    "6o0": {"Rp":"3o0", "Up": "6o0", "Fp": "6o2", "F": "6o4", "U": "6o0", "R": "5o0"}, 
+    "6o1": {"Rp":"3o1", "Up": "6o4", "Fp": "6o4", "F": "6o2", "U": "6o2", "R": "5o1"}, 
+    "6o2": {"Rp":"3o2", "Up": "6o1", "Fp": "6o1", "F": "6o0", "U": "6o3", "R": "5o2"}, 
+    "6o3": {"Rp":"3o4", "Up": "6o2", "Fp": "6o3", "F": "6o3", "U": "6o4", "R": "5o6"}, 
+    "6o4": {"Rp":"3o5", "Up": "6o3", "Fp": "6o0", "F": "6o1", "U": "6o1", "R": "5o3"}, 
+    "6o5": {"Rp":"3o6", "Up": "6o5", "Fp": "6o5", "F": "6o5", "U": "6o5", "R": "5o4"},
+  }
+
+  // import movesMap from './movesMap.json'; 
+
+  const imgEle = document.getElementById('cubeImage')
+  imgEle.state = '0o0'
+
+  const getActionSelected = (key) => {
+    switch (key) {
+      case 'A': return 'R';
+      case 'Z': return 'Rp';
+      case 'V': return 'U';
+      case 'F': return 'Up';
+      case 'B': return 'F';
+      case 'G': return 'Fp';
+    }
+  }
+
+  const handleMovement = (move) => {
+      const currState = imgEle.state;
+
+      console.log("curr state: " + currState)
+      console.log("move: " + move)
+      const nextState = movesMap[currState][move];
+      console.log(nextState)
+      const nextImg = `./img/${nextState}.png`;
+
+      imgEle.state = nextState;
+      imgEle.src = nextImg;
+  }
+
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', (e) => handleMovement(e.target.id));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    let move = getActionSelected(e.key.toUpperCase()); 
+
+    if (move) {
+      document.getElementById(move).classList.add('key-action'); 
+      handleMovement(move); 
+    }
+
+  })
+
+  document.addEventListener('keyup', (e) => {
+    let keyReleased = getActionSelected(e.key.toUpperCase()); 
+
+    if (keyReleased) {
+      document.getElementById(keyReleased).classList.remove('key-action'); 
+    }
+  })
+
+</script>
+</body>
+</html>
